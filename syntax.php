@@ -1,10 +1,8 @@
 <?php
 /**
- * Plugin vertical : Set "vertical-align: middle" to a table
+ * Plugin vertical : Configure vertical-align in tables.
  *
- * Syntax: <vertical>content</vertical>
- *         <vertical head>content</vertical>
- *         <vertical body>content</vertical>
+ * Syntax: <vertical head=bottom body=center>table</vertical>
  *
  * @author     Pavel Korotkiy (outdead)
  * @license    MIT (https://opensource.org/license/mit/)
@@ -12,6 +10,7 @@
 
 if (!defined('DOKU_INC')) die();
 if (!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN', DOKU_INC.'lib/plugins/');
+
 require_once(DOKU_PLUGIN.'syntax.php');
 
 class syntax_plugin_vertical extends DokuWiki_Syntax_Plugin {
@@ -20,9 +19,9 @@ class syntax_plugin_vertical extends DokuWiki_Syntax_Plugin {
             'author' => 'outdead',
             'email'  => 'paul.korotkiy@gmail.com',
             'date'   => '2023-04-01',
-            'name'   => 'Vertical Plugin',
-            'desc'   => 'Simple plugin to set "vertical-align: middle" to a table',
-            'url'    => 'http://www.dokuwiki.org/plugin:vertical',
+            'name'   => 'Table Vertical Align',
+            'desc'   => 'Simple plugin to configure vertical-align in tables',
+            'url'    => 'https://github.com/outdead/dokuwiki-plugin-vertical',
         );
     }
 
