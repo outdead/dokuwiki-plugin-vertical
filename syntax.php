@@ -26,7 +26,6 @@ class syntax_plugin_vertical extends DokuWiki_Syntax_Plugin {
         );
     }
 
-
     function getType() {
         return 'container';
     }
@@ -36,7 +35,7 @@ class syntax_plugin_vertical extends DokuWiki_Syntax_Plugin {
     }
 
     function getAllowedTypes() {
-        return array('container','substition','protected','disabled','formatting','paragraphs');
+        return array('container', 'substition', 'protected', 'disabled', 'formatting', 'paragraphs');
     }
 
     function getSort() {
@@ -44,7 +43,7 @@ class syntax_plugin_vertical extends DokuWiki_Syntax_Plugin {
     }
 
     function connectTo($mode) {
-        $this->Lexer->addEntryPattern('<vertical.*?>(?=.*?</vertical>)', $mode, 'plugin_vertical');
+        $this->Lexer->addEntryPattern('<vertical[^>]*>(?=.*?</vertical>)', $mode, 'plugin_vertical');
     }
 
     function postConnect() {
@@ -54,15 +53,13 @@ class syntax_plugin_vertical extends DokuWiki_Syntax_Plugin {
     function handle($match, $state, $pos, $handler){
         switch ($state) {
             case DOKU_LEXER_ENTER:
-                $data = strtolower(trim(substr($match,6,-1)));
+                $data = strtolower(trim(substr($match, 9, -1)));
+                $data = trim($data);
                 return array($state, $data);
-
             case DOKU_LEXER_UNMATCHED :
                 return array($state, $match);
-
             case DOKU_LEXER_EXIT :
                 return array($state, '');
-
         }
 
         return false;
@@ -71,23 +68,40 @@ class syntax_plugin_vertical extends DokuWiki_Syntax_Plugin {
     function render($mode, $renderer, $indata) {
         if ($mode == 'xhtml') {
             list($state, $match) = $indata;
-            switch ($state) {
 
+            switch ($state) {
                 case DOKU_LEXER_ENTER:
-                    $class = "vertical_center";
-                    if (htmlspecialchars($match) == "head") {
-                        $class .= "_head";
-                    } elseif (htmlspecialchars($match) == "body") {
-                        $class .= "_body";
+                    $class = "";
+                    $instructions = explode(" ", htmlspecialchars($match));
+
+                    foreach ($instructions as $instruction) {
+                        $parts = explode("=", $instruction);
+
+                        if (count($parts) != 2) {
+                            continue;
+                        }
+
+                        $position = $parts[0];
+                        $align = $parts[1];
+
+                        if ($position != "head" && $position != "body") {
+                            continue;
+                        }
+
+                        if ($align != "top" && $align != "center" && $align != "bottom") {
+                            continue;
+                        }
+
+                        $class .= " vertical_${align}_${position}";
                     }
+
+                    $class = trim($class);
 
                     $renderer->doc .= '<div class="'.$class.'">';
                     break;
-
                 case DOKU_LEXER_UNMATCHED :
                     $renderer->doc .= $renderer->_xmlEntities($match);
                     break;
-
                 case DOKU_LEXER_EXIT :
                     $renderer->doc .= "</div>";
                     break;

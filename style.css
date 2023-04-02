@@ -1,3 +1,15 @@
+.vertical_top div th, .vertical_top div td {
+    vertical-align: top;
+}
+
+.vertical_top_head div th {
+    vertical-align: top;
+}
+
+.vertical_top_body div td {
+    vertical-align: top;
+}
+
 .vertical_center div th, .vertical_center div td {
     vertical-align: middle;
 }
@@ -8,4 +20,16 @@
 
 .vertical_center_body div td {
     vertical-align: middle;
+}
+
+.vertical_bottom div th, .vertical_bottom div td {
+    vertical-align: bottom;
+}
+
+.vertical_bottom_head div th {
+    vertical-align: bottom;
+}
+
+.vertical_bottom_body div td {
+    vertical-align: bottom;
 }
