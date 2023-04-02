@@ -1,0 +1,11 @@
+.vertical_center div th, .vertical_center div td {
+    vertical-align: middle;
+}
+
+.vertical_center_head div th {
+    vertical-align: middle;
+}
+
+.vertical_center_body div td {
+    vertical-align: middle;
+}
