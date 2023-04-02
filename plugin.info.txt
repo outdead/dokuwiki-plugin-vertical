@@ -1,4 +1,4 @@
-base Table Vertical Align
+base vertical
 author outdead
 email paul.korotkiy@gmail.com
 date 2023-04-01
