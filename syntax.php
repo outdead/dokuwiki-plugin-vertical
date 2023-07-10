@@ -18,7 +18,7 @@ class syntax_plugin_vertical extends DokuWiki_Syntax_Plugin {
         return array(
             'author' => 'outdead',
             'email'  => 'paul.korotkiy@gmail.com',
-            'date'   => '2023-04-01',
+            'date'   => '2023-07-11',
             'name'   => 'Table Vertical Align',
             'desc'   => 'Simple plugin to configure vertical-align in tables',
             'url'    => 'https://github.com/outdead/dokuwiki-plugin-vertical',
